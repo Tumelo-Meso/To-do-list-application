@@ -1,6 +1,6 @@
 //Importing the express library which allows us to receive and handle HTTP requests to our server
 import express from "express"
-
+import userMiddleware from "./middleware/userMiddleware.js"
 
 //Creating an instance of the an object of the express package which will be used to allows us to listen for requests
 //This step allows to have access to the  express package 

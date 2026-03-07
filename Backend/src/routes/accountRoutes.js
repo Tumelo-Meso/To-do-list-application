@@ -102,11 +102,11 @@ router.post('/register',async(req,res)=>{
 
         //Saving the user data into the database
         const [result]= await pool.query("INSERT INTO users (username,email,hashPassword) VALUES (?,?,?)",[username,email,hashPassword])
-        console.log(result)
+        
         
 
         //We create a session token using the userId and our secret key. This token works like a unique identifier when broswering in our software
-        const token = jwt.sign({id:result[0].insertId}, process.env.JWT_SECRET_KEY,  { expiresIn: '24h'})
+        const token = jwt.sign({id:result.insertId}, process.env.JWT_SECRET_KEY,  { expiresIn: '24h'})
 
         //Sending the token to the frontend 
         return res.status(201).json({token})

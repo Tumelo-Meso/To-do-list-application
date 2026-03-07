@@ -1,9 +1,12 @@
 //Importing the express library which allows us to receive and handle HTTP requests to our server
 import express from "express"
 
-//Importing account routes from accountRoutes.js filr
+//Importing account routes from accountRoutes.js file
 import accountRoutes from './routes/accountRoutes.js'
 
+
+//Importing tasks routes from tasksRoutes.js file
+import taskRoutes from './routes/taskRoutes.js'
 
 //Importing usermiddleware
 import userMiddleware from "./middleware/userMiddleware.js"
@@ -97,7 +100,7 @@ app.get('/tasks',userMiddleware,async (req,res)=>{
 app.use('/userAuthentication',accountRoutes)
 
 //Using all endpoints of tasks which will all be protect by the userMiddleware
-app.use('/tasks',userMiddleware)
+app.use('/tasks',userMiddleware,taskRoutes)
 
 
 //Start listening to incoming request from our local PORT 8080

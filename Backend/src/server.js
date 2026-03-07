@@ -62,8 +62,9 @@ app.get('/tasks',userMiddleware,async (req,res)=>{
         //Select all the user data from the database where the id matches the userId
         const [row] = await  pool.query('SELECT * FROM users WHERE id = ?', [userId])
 
+        
         //If the resulting array is empty then no user with that id was found in our database
-        if(row.length==0){
+        if(row[0].length==0){
             return res.status(403).json({message:"User does not exist"})
         }
 
@@ -73,12 +74,10 @@ app.get('/tasks',userMiddleware,async (req,res)=>{
 
         //Combining the tasks and user info into one object before sending to the front end 
         const userInfo = {
-            id : row.id,
-            username : row.username,
-            email : row.email,
-            password : row.password,
-            versionNumber: row.versionNumber,
-            tasks : [row2]
+            id : row[0].id,
+            username : row[0].username,
+            email : row[0].email,
+            tasks : row2
         }
 
         //Sending the user data to the frontend 

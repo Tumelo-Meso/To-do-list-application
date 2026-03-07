@@ -97,6 +97,16 @@ router.put('/editTask', async (req,res)=>{
     */
 
     try {
+
+        //Checking whether the task exists or not
+        const [row] = await pool.query("SELECT * FROM tasks WHERE id =? AND userId =?",[taskId,userId])
+
+
+        //If the array return is zero then the task doesnt exist 
+        if(row.length === 0 ){
+            return res.status(401).json({message:"Task doesnt exist"})
+        }
+
         const [result] = await pool.query('UPDATE tasks SET title = ?, description = ?, expectedCompletion = ?, versionNumber = ?, completed =?  WHERE versionNumber = ? AND userId = ? AND id = ?',[title,description,expectedCompletion,versionNumber+1,completed,versionNumber,userId,taskId])
 
         //If the result affectedRows is 0 then the task has been modified by another session
@@ -147,6 +157,13 @@ router.delete('/deleteTask', async (req,res)=>{
 
      try {
 
+            //Checking whether the task exists or not
+        const [row] = await pool.query("SELECT * FROM tasks WHERE id =? AND userId =?",[taskId,userId])
+
+        //If the array return is zero then the task doesnt exist 
+        if(row.length === 0 ){
+            return res.status(401).json({message:"Task doesnt exist"})
+        }
         const [result] = await pool.query("DELETE FROM tasks WHERE id=? AND versionNumber=? AND userId =?",[taskId,versionNumber,userId])
 
         //If the result affectedRows is 0 then the task has been modified by another session

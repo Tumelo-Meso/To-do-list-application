@@ -14,7 +14,8 @@ import userMiddleware from "./middleware/userMiddleware.js"
 
 //Importing the database to write data into 
 import pool from "./mysql.js"
-
+import dotenv from "dotenv";
+dotenv.config();
 
 //Creating an instance of the an object of the express package which will be used to allows us to listen for requests
 //This step allows to have access to the  express package 
@@ -67,7 +68,7 @@ app.get('/tasks',userMiddleware,async (req,res)=>{
 
         
         //If the resulting array is empty then no user with that id was found in our database
-        if(row[0].length==0){
+        if(row.length==0){
             return res.status(403).json({message:"User does not exist"})
         }
 

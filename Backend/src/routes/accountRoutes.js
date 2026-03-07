@@ -54,8 +54,8 @@ router.post('/login',async (req,res)=>{
                 /*Important to note that even when the password is invalid we do not neccessarily tell the user that the password is invalid 
                 Doing so would put our database and system at risk because we could be telling a hacker that the email does exist in the database but the password is incorrect which is dangerous
                 */
-                res.status(401).json({message:"Invalid credentials please enter the correct email and password"})
-                return
+                return res.status(401).json({message:"Invalid credentials please enter the correct email and password"})
+                
             }
             
         //Creating a session token using a combinaton of user id and our own secret key 
@@ -103,8 +103,7 @@ router.post('/register',async(req,res)=>{
         //Saving the user data into the database
         const [result]= await pool.query("INSERT INTO users (username,email,hashPassword) VALUES (?,?,?)",[username,email,hashPassword])
         
-        
-
+    
         //We create a session token using the userId and our secret key. This token works like a unique identifier when broswering in our software
         const token = jwt.sign({id:result.insertId}, process.env.JWT_SECRET_KEY,  { expiresIn: '24h'})
 

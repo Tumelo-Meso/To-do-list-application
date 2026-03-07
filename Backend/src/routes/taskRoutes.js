@@ -1,20 +1,12 @@
 //importing the express package to use for receiving HTTP requests
 import express from 'express'
 
-//importing the bcrypt package to encrypt/hash sensitive information
-import bcrypt from 'bcryptjs'
-
-//importinf the jwt package to create session tokens
-import jwt from 'jsonwebtoken'
-
 //Importing the database to write queries 
 import pool from '../mysql.js'
 
 
 //Creating an instance of the express router which is a subset of the main app/server
 const router = express.Router()
-
-
 
 
 

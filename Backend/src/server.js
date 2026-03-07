@@ -102,7 +102,6 @@ app.use('/userAuthentication',accountRoutes)
 //Using all endpoints of tasks which will all be protect by the userMiddleware
 app.use('/tasks',userMiddleware,taskRoutes)
 
-
 //Start listening to incoming request from our local PORT 8080
 app.listen(PORT, ()=>{
     console.log(`Server has started on PORT ${PORT}`)

@@ -1,0 +1,9 @@
+# Protectagainst environment variables
+*.env
+
+#Ignore the testing rest client file
+*.rest
+
+#Ignore node_modules file
+
+node_modules/

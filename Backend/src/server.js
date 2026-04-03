@@ -15,12 +15,14 @@ import userMiddleware from "./middleware/userMiddleware.js"
 //Importing the database to write data into 
 import pool from "./mysql.js"
 import dotenv from "dotenv";
+
+import cors from "cors"
 dotenv.config();
 
 //Creating an instance of the an object of the express package which will be used to allows us to listen for requests
 //This step allows to have access to the  express package 
 const app = express()
-
+app.use(cors());
 //Local port to run the server
 const PORT = process.env.PORT || 8080
 
